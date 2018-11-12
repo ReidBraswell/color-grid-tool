@@ -16,8 +16,8 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props) {
     super(props);
     this.state = {
-      hue: 240,
-      hueValue: 240,
+      hue: 0,
+      hueValue: 0,
       useGreyscale: false,
       useSully: false,
     };
