@@ -1,32 +1,82 @@
 import * as React from 'react';
 
+import debounce from './debounce';
 import Dot from './Dot/Dot';
 import './App.css';
 
-class App extends React.Component {
-  state = {
-    hue: 0,
+type AppProps = {};
+type AppState = {
+  hue: number;
+  hueValue: number;
+  useGreyscale: boolean;
+  useSully: boolean;
+};
+
+class App extends React.Component<AppProps, AppState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hue: 240,
+      hueValue: 240,
+      useGreyscale: false,
+      useSully: false,
+    };
+  }
+
+  handleHueSubmit = event => {
+    event.preventDefault();
+    const { hueValue } = this.state;
+    this.setState({ hue: hueValue });
   };
 
   handleHueChange = event => {
-    this.setState({ hue: event.target.value });
+    this.setState({ hueValue: event.target.value });
+  };
+
+  handleGreyscaleChange = event => {
+    this.setState({ useGreyscale: event.target.checked });
+  };
+
+  handleSullyChange = event => {
+    this.setState({ useSully: event.target.checked });
   };
 
   render() {
-    const { hue } = this.state;
+    const { hue, hueValue, useGreyscale, useSully } = this.state;
     return (
       <React.Fragment>
         <h1>Color Gradient Tool</h1>
-        <label htmlFor="hue">Hue: </label>
-        <input
-          id="hue"
-          type="number"
-          min="0"
-          max="360"
-          step="1"
-          value={hue}
-          onChange={this.handleHueChange}
-        />
+        <form noValidate onSubmit={this.handleHueSubmit}>
+          <label htmlFor="hueValue">Hue: </label>
+          <input
+            id="hueValue"
+            type="number"
+            min="0"
+            max="360"
+            step="1"
+            value={hueValue}
+            onChange={this.handleHueChange}
+          />
+          <br />
+          <label>
+            <input
+              type="checkbox"
+              checked={useGreyscale}
+              onChange={this.handleGreyscaleChange}
+            />
+            Greyscale
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={useSully}
+              onChange={this.handleSullyChange}
+            />
+            For Sully
+          </label>
+          <br />
+          <button type="submit">Update Hue</button>
+        </form>
         <div className="gradient">
           {Array(101)
             .fill(0)
@@ -40,6 +90,8 @@ class App extends React.Component {
                       h={hue}
                       s={s / 100}
                       v={Math.abs(v - 100) / 100}
+                      useGreyscale={useGreyscale}
+                      useSully={useSully}
                     />
                   ))}
               </div>
