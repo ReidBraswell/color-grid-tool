@@ -30,12 +30,17 @@ class App extends React.Component {
         <div className="gradient">
           {Array(101)
             .fill(0)
-            .map((r, x) => (
-              <div className="row">
+            .map((r, v) => (
+              <div key={`row-${v}`} className="row">
                 {Array(101)
                   .fill(0)
-                  .map((c, y) => (
-                    <Dot key={`${x}${y}`} hue={hue} x={x} y={y} />
+                  .map((c, s) => (
+                    <Dot
+                      key={`${v}-${s}`}
+                      h={hue}
+                      s={s / 100}
+                      v={Math.abs(v - 100) / 100}
+                    />
                   ))}
               </div>
             ))}

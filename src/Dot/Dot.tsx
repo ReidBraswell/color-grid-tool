@@ -1,13 +1,15 @@
 import * as React from 'react';
 
+import hsvToRgb from '../hsvToRgb';
 import './Dot.css';
 
-function Dot({ hue, x, y }) {
+function Dot({ h, s, v }) {
+  const { r, g, b } = hsvToRgb(h, s, v);
   const style = {
-    backgroundColor: `hsl(${hue}, ${x}%, ${y}%)`,
+    backgroundColor: `rgb(${r}, ${g}, ${b})`,
   };
 
-  return <div title={`${x}-${y}`} className="dot" style={style} />;
+  return <div className="dot" style={style} />;
 }
 
 export default Dot;
