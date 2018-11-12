@@ -13,7 +13,7 @@ function Dot({ h, s, v, useGreyscale, useSully }) {
   if (useGreyscale) {
     backgroundColor = greyscale;
   } else {
-    const isValid = wcag.hex(hex, '#fff') > 4.5;
+    const isValid = wcag.hex(hex, '#fff') >= 4.5;
     backgroundColor = isValid
       ? useSully && greyscale !== '#737373'
         ? 'white'
