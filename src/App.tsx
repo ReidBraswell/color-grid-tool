@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import debounce from './debounce';
-import Dot from './Dot/Dot';
-import './App.css';
+import ColorForm from './ColorForm/ColorForm';
+import Controls from './Controls/Controls';
+import Grid from './Grid/Grid';
 
 type AppProps = {};
 type AppState = {
@@ -45,57 +45,19 @@ class App extends React.Component<AppProps, AppState> {
     const { hue, hueValue, useGreyscale, useSully } = this.state;
     return (
       <React.Fragment>
-        <h1>Color Gradient Tool</h1>
-        <form noValidate onSubmit={this.handleHueSubmit}>
-          <label htmlFor="hueValue">Hue: </label>
-          <input
-            id="hueValue"
-            type="number"
-            min="0"
-            max="360"
-            step="1"
-            value={hueValue}
-            onChange={this.handleHueChange}
-          />
-          <button type="submit">Update Hue</button>
-        </form>
-        <br />
-        <label>
-          <input
-            type="checkbox"
-            checked={useGreyscale}
-            onChange={this.handleGreyscaleChange}
-          />
-          Greyscale
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={useSully}
-            onChange={this.handleSullyChange}
-          />
-          For Sully
-        </label>
-        <div className="gradient">
-          {Array(101)
-            .fill(0)
-            .map((r, v) => (
-              <div key={`row-${v}`} className="row">
-                {Array(101)
-                  .fill(0)
-                  .map((c, s) => (
-                    <Dot
-                      key={`${v}-${s}`}
-                      h={hue}
-                      s={s / 100}
-                      v={Math.abs(v - 100) / 100}
-                      useGreyscale={useGreyscale}
-                      useSully={useSully}
-                    />
-                  ))}
-              </div>
-            ))}
-        </div>
+        <h1>Color Grid Tool</h1>
+        <ColorForm
+          hueValue={hueValue}
+          handleHueChange={this.handleHueChange}
+          handleHueSubmit={this.handleHueSubmit}
+        />
+        <Controls
+          useGreyscale={useGreyscale}
+          handleGreyscaleChange={this.handleGreyscaleChange}
+          useSully={useSully}
+          handleSullyChange={this.handleSullyChange}
+        />
+        <Grid hue={hue} useGreyscale={useGreyscale} useSully={useSully} />
       </React.Fragment>
     );
   }
