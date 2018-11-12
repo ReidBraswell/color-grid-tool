@@ -57,26 +57,25 @@ class App extends React.Component<AppProps, AppState> {
             value={hueValue}
             onChange={this.handleHueChange}
           />
-          <br />
-          <label>
-            <input
-              type="checkbox"
-              checked={useGreyscale}
-              onChange={this.handleGreyscaleChange}
-            />
-            Greyscale
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={useSully}
-              onChange={this.handleSullyChange}
-            />
-            For Sully
-          </label>
-          <br />
           <button type="submit">Update Hue</button>
         </form>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            checked={useGreyscale}
+            onChange={this.handleGreyscaleChange}
+          />
+          Greyscale
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={useSully}
+            onChange={this.handleSullyChange}
+          />
+          For Sully
+        </label>
         <div className="gradient">
           {Array(101)
             .fill(0)
