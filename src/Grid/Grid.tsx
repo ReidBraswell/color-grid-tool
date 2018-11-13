@@ -5,6 +5,13 @@ import Dot from '../Dot/Dot';
 import './Grid.css';
 
 const GRID_SIZE = 101;
+const GREYSCALE_VALUES = [
+  '#737373', // 115
+  '#5C5C5C', // 92
+  '#474747', // 71
+  '#363636', // 54
+  '#262626', // 38
+];
 
 function generateGreyscaleHex(color: tinycolor.Instance): string {
   const { r, g, b } = color.toRgb();
@@ -34,16 +41,14 @@ function generateBackground({
 
   if (useGreyscale) {
     backgroundColor = greyscale;
+  } else if (useSully) {
+    backgroundColor = GREYSCALE_VALUES.indexOf(greyscale) > -1 ? hex : '#fff';
   } else {
     const isReadable = tinycolor.isReadable(hex, '#fff', {
       level: 'AA',
       size: fontSize === '14' ? 'small' : 'large',
     });
-    backgroundColor = isReadable
-      ? useSully && greyscale !== '#737373'
-        ? 'white'
-        : hex
-      : 'red';
+    backgroundColor = isReadable ? hex : '#ff0000';
   }
 
   return backgroundColor;
