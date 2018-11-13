@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as wcag from 'wcag-contrast';
 import tinycolor from 'tinycolor2';
 
 import Dot from '../Dot/Dot';
@@ -7,7 +6,13 @@ import './Grid.css';
 
 const GRID_SIZE = 101;
 
-function generateBackgroundColor({
+function generateGreyscaleHex(color: tinycolor.Instance): string {
+  const { r, g, b } = color.toRgb();
+  const grey = r * 0.3 + g * 0.59 + b * 0.11;
+  return tinycolor({ r: grey, g: grey, b: grey }).toHexString();
+}
+
+function generateBackground({
   fontSize,
   h,
   s,
@@ -24,16 +29,17 @@ function generateBackgroundColor({
 }): string {
   const color = tinycolor({ h, s, v });
   const hex = color.toHexString();
-  const greyscale = color.greyscale().toHexString();
+  const greyscale = generateGreyscaleHex(color);
   let backgroundColor;
 
   if (useGreyscale) {
     backgroundColor = greyscale;
   } else {
-    const ratio = wcag.hex(hex, '#fff');
-    const isValid =
-      (fontSize === '14' && ratio >= 4.5) || (fontSize === '18' && ratio >= 3);
-    backgroundColor = isValid
+    const isReadable = tinycolor.isReadable(hex, '#fff', {
+      level: 'AA',
+      size: fontSize === '14' ? 'small' : 'large',
+    });
+    backgroundColor = isReadable
       ? useSully && greyscale !== '#737373'
         ? 'white'
         : hex
@@ -54,7 +60,7 @@ function Grid(props) {
             {Array(GRID_SIZE)
               .fill('')
               .map((c, s) => {
-                const backgroundColor = generateBackgroundColor({
+                const backgroundColor = generateBackground({
                   fontSize,
                   useGreyscale,
                   useSully,
