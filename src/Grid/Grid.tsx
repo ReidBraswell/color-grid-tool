@@ -6,8 +6,13 @@ import './Grid.css';
 
 const GRID_SIZE = 101;
 const GREYSCALE_VALUES = [
+  '#f2f2f2', // 242
+  '#dedede', // 222
+  '#c7c7c7', // 199
+  '#adadad', // 173
+  '#8f8f8f', // 143
   '#737373', // 115
-  '#5C5C5C', // 92
+  '#5c5c5c', // 92
   '#474747', // 71
   '#363636', // 54
   '#262626', // 38
