@@ -6,6 +6,7 @@ import Grid from './Grid/Grid';
 
 type AppProps = {};
 type AppState = {
+  fontSize: string;
   hue: number;
   hueValue: number;
   useGreyscale: boolean;
@@ -16,12 +17,17 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props) {
     super(props);
     this.state = {
+      fontSize: '14',
       hue: 0,
       hueValue: 0,
       useGreyscale: false,
       useSully: false,
     };
   }
+
+  handleFontSizeChange = event => {
+    this.setState({ fontSize: event.target.value });
+  };
 
   handleHueSubmit = event => {
     event.preventDefault();
@@ -42,11 +48,13 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
-    const { hue, hueValue, useGreyscale, useSully } = this.state;
+    const { fontSize, hue, hueValue, useGreyscale, useSully } = this.state;
     return (
       <React.Fragment>
         <h1>Color Grid Tool</h1>
         <ColorForm
+          fontSize={fontSize}
+          handleFontSizeChange={this.handleFontSizeChange}
           hueValue={hueValue}
           handleHueChange={this.handleHueChange}
           handleHueSubmit={this.handleHueSubmit}
@@ -57,7 +65,12 @@ class App extends React.Component<AppProps, AppState> {
           useSully={useSully}
           handleSullyChange={this.handleSullyChange}
         />
-        <Grid hue={hue} useGreyscale={useGreyscale} useSully={useSully} />
+        <Grid
+          fontSize={fontSize}
+          hue={hue}
+          useGreyscale={useGreyscale}
+          useSully={useSully}
+        />
       </React.Fragment>
     );
   }

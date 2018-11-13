@@ -1,20 +1,51 @@
 import * as React from 'react';
 
-function ColorForm({ hueValue, handleHueChange, handleHueSubmit }) {
+function ColorForm({
+  fontSize,
+  handleFontSizeChange,
+  hueValue,
+  handleHueChange,
+  handleHueSubmit,
+}) {
   return (
-    <form noValidate onSubmit={handleHueSubmit}>
-      <label htmlFor="hueValue">Hue: </label>
-      <input
-        id="hueValue"
-        type="number"
-        min="0"
-        max="360"
-        step="1"
-        value={hueValue}
-        onChange={handleHueChange}
-      />
-      <button type="submit">Update Hue</button>
-    </form>
+    <React.Fragment>
+      <form noValidate onSubmit={handleHueSubmit}>
+        <label htmlFor="hueValue">Hue: </label>
+        <input
+          id="hueValue"
+          type="number"
+          min="0"
+          max="360"
+          step="1"
+          value={hueValue}
+          onChange={handleHueChange}
+        />
+        <button type="submit">Update Hue</button>
+        <fieldset>
+          <legend>Font Size (pt)</legend>
+          <div>
+            <input
+              type="radio"
+              name="fontSize"
+              value="14"
+              checked={fontSize === '14'}
+              onChange={handleFontSizeChange}
+            />
+            <label htmlFor="14">14pt</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="fontSize"
+              value="18"
+              checked={fontSize === '18'}
+              onChange={handleFontSizeChange}
+            />
+            <label htmlFor="18">18pt</label>
+          </div>
+        </fieldset>
+      </form>
+    </React.Fragment>
   );
 }
 
