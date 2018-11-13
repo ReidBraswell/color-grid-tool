@@ -25,6 +25,7 @@ function ColorForm({
           <legend>Font Size (pt)</legend>
           <div>
             <input
+              id="14"
               type="radio"
               name="fontSize"
               value="14"
@@ -35,6 +36,7 @@ function ColorForm({
           </div>
           <div>
             <input
+              id="18"
               type="radio"
               name="fontSize"
               value="18"
