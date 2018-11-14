@@ -26,30 +26,56 @@ class App extends React.Component<AppProps, AppState> {
     };
   }
 
+  componentDidMount() {
+    this.attemptToFetchCachedState();
+  }
+
+  attemptToFetchCachedState(): void {
+    const colorGridState = localStorage.getItem('colorGridState');
+    if (colorGridState) {
+      try {
+        const state: AppState = JSON.parse(colorGridState);
+        this.setState(state);
+      } catch (error) {
+        console.error(error);
+        this.updateLocalStorage();
+      }
+    } else {
+      this.updateLocalStorage();
+    }
+  }
+
+  updateLocalStorage(): void {
+    localStorage.setItem('colorGridState', JSON.stringify(this.state));
+  }
+
   handleFontSizeChange = (e: React.FormEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement;
-    this.setState({ fontSize: target.value });
+    this.setState({ fontSize: target.value }, this.updateLocalStorage);
   };
 
   handleHueSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     const { hueValue } = this.state;
-    this.setState({ hue: hueValue });
+    this.setState({ hue: hueValue }, this.updateLocalStorage);
   };
 
   handleHueChange = (e: React.FormEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement;
-    this.setState({ hueValue: parseInt(target.value, 10) });
+    this.setState(
+      { hueValue: parseInt(target.value, 10) },
+      this.updateLocalStorage
+    );
   };
 
   handleGrayscaleChange = (e: React.FormEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement;
-    this.setState({ useGrayscale: target.checked });
+    this.setState({ useGrayscale: target.checked }, this.updateLocalStorage);
   };
 
   handleSullyChange = (e: React.FormEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement;
-    this.setState({ useSully: target.checked });
+    this.setState({ useSully: target.checked }, this.updateLocalStorage);
   };
 
   render() {
