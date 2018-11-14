@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 
-export const GREYSCALE_VALUES = [
+export const GRAYSCALE_VALUES = [
   '#f2f2f2', // 242
   '#dedede', // 222
   '#c7c7c7', // 199
