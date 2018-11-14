@@ -1,9 +1,10 @@
 import * as React from 'react';
 import tinycolor from 'tinycolor2';
 import ReactTooltip from 'react-tooltip';
+import { fill } from 'core-js/es6/array';
 
 import colorToLab, { L_VALUES } from '../utilities/colorToLab';
-import colorToGreyscaleHex from '../utilities/colorToGreyscaleHex';
+import colorToGrayscaleHex from '../utilities/colorToGrayscaleHex';
 import Dot from '../Dot/Dot';
 import './Grid.css';
 
@@ -14,30 +15,30 @@ function generateBackground({
   h,
   s,
   v,
-  useGreyscale,
-  useSully,
+  useGrayscale,
+  useSully
 }: {
   fontSize: string;
   h: number;
   s: number;
   v: number;
-  useGreyscale: boolean;
+  useGrayscale: boolean;
   useSully: boolean;
 }): string {
   const color = tinycolor({ h, s, v });
   const hex = color.toHexString();
-  const greyscale = colorToGreyscaleHex(color);
+  const grayscale = colorToGrayscaleHex(color);
   const { l } = colorToLab(color);
   let backgroundColor;
 
-  if (useGreyscale) {
-    backgroundColor = greyscale;
+  if (useGrayscale) {
+    backgroundColor = grayscale;
   } else if (useSully) {
     backgroundColor = L_VALUES.indexOf(Math.round(l)) > -1 ? hex : '#fff';
   } else {
     const isReadable = tinycolor.isReadable(hex, '#fff', {
       level: 'AA',
-      size: fontSize === '14' ? 'small' : 'large',
+      size: fontSize === '14' ? 'small' : 'large'
     });
     backgroundColor = isReadable ? hex : '#ff0000';
   }
@@ -45,31 +46,31 @@ function generateBackground({
   return backgroundColor;
 }
 
-function Grid(props) {
-  const { fontSize, hue, useGreyscale, useSully } = props;
+type GridProps = {
+  fontSize: string;
+  hue: number;
+  useGrayscale: boolean;
+  useSully: boolean;
+};
+
+function Grid({ fontSize, hue, useGrayscale, useSully }: GridProps) {
   return (
     <React.Fragment>
       <ReactTooltip id="grid-tooltip" effect="solid" />
       <div className="grid">
-        {Array(GRID_SIZE)
-          .fill('')
-          .map((r, v) => {
-            return Array(GRID_SIZE)
-              .fill('')
-              .map((c, s) => {
-                const backgroundColor = generateBackground({
-                  fontSize,
-                  useGreyscale,
-                  useSully,
-                  h: hue,
-                  s: s / 100,
-                  v: Math.abs(v - 100) / 100,
-                });
-                return (
-                  <Dot key={`${v}-${s}`} backgroundColor={backgroundColor} />
-                );
-              });
-          })}
+        {fill(Array(GRID_SIZE), '').map((r, v) => {
+          return fill(Array(GRID_SIZE), '').map((c, s) => {
+            const backgroundColor = generateBackground({
+              fontSize,
+              useGrayscale,
+              useSully,
+              h: hue,
+              s: s / 100,
+              v: Math.abs(v - 100) / 100
+            });
+            return <Dot key={`${v}-${s}`} backgroundColor={backgroundColor} />;
+          });
+        })}
       </div>
     </React.Fragment>
   );

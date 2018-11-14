@@ -1,12 +1,20 @@
 import * as React from 'react';
 
+type ColorFormProps = {
+  fontSize: string;
+  handleFontSizeChange: (e: React.FormEvent<EventTarget>) => void;
+  hueValue: number;
+  handleHueChange: (e: React.FormEvent<EventTarget>) => void;
+  handleHueSubmit: (e: React.FormEvent<EventTarget>) => void;
+};
+
 function ColorForm({
   fontSize,
   handleFontSizeChange,
   hueValue,
   handleHueChange,
-  handleHueSubmit,
-}) {
+  handleHueSubmit
+}: ColorFormProps) {
   return (
     <React.Fragment>
       <form noValidate onSubmit={handleHueSubmit}>

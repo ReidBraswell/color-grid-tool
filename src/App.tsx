@@ -10,46 +10,50 @@ type AppState = {
   fontSize: string;
   hue: number;
   hueValue: number;
-  useGreyscale: boolean;
+  useGrayscale: boolean;
   useSully: boolean;
 };
 
 class App extends React.Component<AppProps, AppState> {
-  constructor(props) {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       fontSize: '14',
       hue: 0,
       hueValue: 0,
-      useGreyscale: false,
-      useSully: false,
+      useGrayscale: false,
+      useSully: false
     };
   }
 
-  handleFontSizeChange = event => {
-    this.setState({ fontSize: event.target.value });
+  handleFontSizeChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ fontSize: target.value });
   };
 
-  handleHueSubmit = event => {
-    event.preventDefault();
+  handleHueSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
     const { hueValue } = this.state;
     this.setState({ hue: hueValue });
   };
 
-  handleHueChange = event => {
-    this.setState({ hueValue: event.target.value });
+  handleHueChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ hueValue: parseInt(target.value, 10) });
   };
 
-  handleGreyscaleChange = event => {
-    this.setState({ useGreyscale: event.target.checked });
+  handleGrayscaleChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ useGrayscale: target.checked });
   };
 
-  handleSullyChange = event => {
-    this.setState({ useSully: event.target.checked });
+  handleSullyChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ useSully: target.checked });
   };
 
   render() {
-    const { fontSize, hue, hueValue, useGreyscale, useSully } = this.state;
+    const { fontSize, hue, hueValue, useGrayscale, useSully } = this.state;
     return (
       <React.Fragment>
         <h1>Color Grid Tool</h1>
@@ -61,15 +65,15 @@ class App extends React.Component<AppProps, AppState> {
           handleHueSubmit={this.handleHueSubmit}
         />
         <Controls
-          useGreyscale={useGreyscale}
-          handleGreyscaleChange={this.handleGreyscaleChange}
+          useGrayscale={useGrayscale}
+          handleGrayscaleChange={this.handleGrayscaleChange}
           useSully={useSully}
           handleSullyChange={this.handleSullyChange}
         />
         <Grid
           fontSize={fontSize}
           hue={hue}
-          useGreyscale={useGreyscale}
+          useGrayscale={useGrayscale}
           useSully={useSully}
         />
       </React.Fragment>

@@ -3,7 +3,7 @@ import tinycolor from 'tinycolor2';
 
 import './Dot.css';
 
-function Dot({ backgroundColor }) {
+function Dot({ backgroundColor }: { backgroundColor: string }) {
   const { r, g, b } = tinycolor(backgroundColor).toRgb();
   const tip = `Hex: ${backgroundColor}<br />RGB: ${r}, ${g}, ${b}`;
   return (

@@ -10,13 +10,13 @@ export const GREYSCALE_VALUES = [
   '#5c5c5c', // 92
   '#474747', // 71
   '#363636', // 54
-  '#262626', // 38
+  '#262626' // 38
 ];
 
-function colorToGreyscaleHex(color: tinycolor.Instance): string {
+function colorToGrayscaleHex(color: tinycolor.Instance): string {
   const { r, g, b } = color.toRgb();
   const grey = r * 0.3 + g * 0.59 + b * 0.11;
   return tinycolor({ r: grey, g: grey, b: grey }).toHexString();
 }
 
-export default colorToGreyscaleHex;
+export default colorToGrayscaleHex;
