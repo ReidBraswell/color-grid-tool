@@ -1,3 +1,8 @@
-.grid-row {
-  height: 7px;
+.grid {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(101, 1fr);
+  grid-auto-rows: minmax(7px, auto);
+  margin: 1rem 0;
+  width: calc(7px * 101);
 }

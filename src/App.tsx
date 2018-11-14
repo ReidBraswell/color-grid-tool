@@ -3,6 +3,7 @@ import * as React from 'react';
 import ColorForm from './ColorForm/ColorForm';
 import Controls from './Controls/Controls';
 import Grid from './Grid/Grid';
+import './App.css';
 
 type AppProps = {};
 type AppState = {
