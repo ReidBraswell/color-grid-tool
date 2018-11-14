@@ -10,18 +10,22 @@ export const L_VALUES = [
   39, // 600
   30, // 700
   21, // 800
-  15, // 900
+  15 // 900
 ];
 
-function rgbToLab({
-  r,
-  g,
-  b,
-}: {
+type rgb = {
   r: number;
   g: number;
   b: number;
-}): { l: number; a: number; b: number } {
+};
+
+type lab = {
+  l: number;
+  a: number;
+  b: number;
+};
+
+function rgbToLab({ r, g, b }: rgb): lab {
   r = r / 255;
   g = g / 255;
   b = b / 255;
@@ -42,9 +46,7 @@ function rgbToLab({
   return { l: 116 * y - 16, a: 500 * (x - y), b: 200 * (y - z) };
 }
 
-function colorToLab(
-  color: tinycolor.Instance
-): { l: number; a: number; b: number } {
+function colorToLab(color: tinycolor.Instance): lab {
   return rgbToLab(color.toRgb());
 }
 
