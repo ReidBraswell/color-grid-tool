@@ -2,22 +2,38 @@
   "name": "color-grid-tool",
   "version": "1.0.0",
   "description": "Find your color!",
-  "keywords": [],
+  "keywords": [
+    "a11y",
+    "color",
+    "grid",
+    "tool",
+    "utility",
+    "wcag"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ReidBraswell/color-gradient-tool.git"
+  },
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Reid Braswell",
+    "email": "reid.braswell@outlook.com"
+  },
   "main": "src/index.tsx",
+  "scripts": {
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
+  },
   "dependencies": {
-    "react": "16.6.1",
-    "react-dom": "16.6.1",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
     "react-scripts": "2.1.1",
     "react-tooltip": "3.9.0",
     "tinycolor2": "1.4.1"
   },
   "devDependencies": {},
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
