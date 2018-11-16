@@ -13,17 +13,17 @@ export const L_VALUES = [
   15 // 900
 ];
 
-type rgb = {
+interface rgb {
   r: number;
   g: number;
   b: number;
-};
+}
 
-type lab = {
+interface lab {
   l: number;
   a: number;
   b: number;
-};
+}
 
 function rgbToLab({ r, g, b }: rgb): lab {
   r = r / 255;
