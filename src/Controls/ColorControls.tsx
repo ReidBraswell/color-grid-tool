@@ -5,16 +5,22 @@ interface ColorControlsProps {
   handleGrayscaleChange: (e: React.FormEvent<EventTarget>) => void;
   showColorRamps: boolean;
   handleColorRampsChange: (e: React.FormEvent<EventTarget>) => void;
+  hueValue: number;
+  handleHueChange: (e: React.FormEvent<EventTarget>) => void;
+  handleHueSubmit: (e: React.FormEvent<EventTarget>) => void;
 }
 
 function ColorControls({
   showGrayscale,
   handleGrayscaleChange,
   showColorRamps,
-  handleColorRampsChange
+  handleColorRampsChange,
+  hueValue,
+  handleHueChange,
+  handleHueSubmit
 }: ColorControlsProps) {
   return (
-    <form noValidate className="controls">
+    <form noValidate onSubmit={handleHueSubmit}>
       <fieldset>
         <legend>Color Controls</legend>
         <div>
@@ -39,6 +45,18 @@ function ColorControls({
           />
           <label htmlFor="showColorRamps">Color Ramps</label>
         </div>
+        <fieldset>
+          <legend>Hue</legend>
+          <input
+            type="number"
+            min="0"
+            max="360"
+            step="1"
+            value={hueValue}
+            onChange={handleHueChange}
+          />
+          <button type="submit">Update Hue</button>
+        </fieldset>
       </fieldset>
     </form>
   );

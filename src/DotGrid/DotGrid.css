@@ -1,0 +1,6 @@
+.dot-grid {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(101, 0.5rem);
+  grid-auto-rows: minmax(0.5rem, auto);
+}

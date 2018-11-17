@@ -14,7 +14,7 @@ function WcagControls({
   handleFontSizeChange
 }: WcagControlsProps) {
   return (
-    <form noValidate className="controls">
+    <form noValidate>
       <fieldset>
         <legend>WCAG Controls</legend>
         <div>
@@ -28,7 +28,7 @@ function WcagControls({
           <label htmlFor="showWcagContrast">WCAG Contrast</label>
         </div>
         <fieldset>
-          <legend>Font Size (pt)</legend>
+          <legend>Font Size</legend>
           <div>
             <input
               id="14"

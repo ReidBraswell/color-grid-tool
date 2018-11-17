@@ -1,10 +1,10 @@
 import * as React from 'react';
+import ClipboardJS from 'clipboard';
 
-import ColorForm from './ColorForm/ColorForm';
 import ColorControls from './Controls/ColorControls';
-import Grid from './Grid/Grid';
-import './App.css';
 import WcagControls from './Controls/WcagControls';
+import DotGrid from './DotGrid/DotGrid';
+import './App.scss';
 
 type AppProps = {};
 type AppState = {
@@ -17,6 +17,8 @@ type AppState = {
 };
 
 class App extends React.Component<AppProps, AppState> {
+  clipboard!: ClipboardJS;
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
@@ -31,6 +33,11 @@ class App extends React.Component<AppProps, AppState> {
 
   componentDidMount() {
     this.attemptToFetchCachedState();
+    this.clipboard = new ClipboardJS('.hover-target');
+  }
+
+  componentWillUnmount() {
+    this.clipboard.destroy();
   }
 
   attemptToFetchCachedState(): void {
@@ -100,27 +107,25 @@ class App extends React.Component<AppProps, AppState> {
     } = this.state;
     return (
       <React.Fragment>
-        <h1>Color Grid Tool</h1>
-        <ColorForm
-          hueValue={hueValue}
-          handleHueChange={this.handleHueChange}
-          handleHueSubmit={this.handleHueSubmit}
-        />
-        <div className="form-grid">
+        <aside className="form-grid">
+          <h1>Color Grid Tool</h1>
+          <ColorControls
+            showGrayscale={showGrayscale}
+            handleGrayscaleChange={this.handleGrayscaleChange}
+            showColorRamps={showColorRamps}
+            handleColorRampsChange={this.handleColorRampsChange}
+            hueValue={hueValue}
+            handleHueChange={this.handleHueChange}
+            handleHueSubmit={this.handleHueSubmit}
+          />
           <WcagControls
             fontSize={fontSize}
             handleFontSizeChange={this.handleFontSizeChange}
             showWcagContrast={showWcagContrast}
             handleWcagContrastChange={this.handleWcagContrastChange}
           />
-          <ColorControls
-            showGrayscale={showGrayscale}
-            handleGrayscaleChange={this.handleGrayscaleChange}
-            showColorRamps={showColorRamps}
-            handleColorRampsChange={this.handleColorRampsChange}
-          />
-        </div>
-        <Grid
+        </aside>
+        <DotGrid
           fontSize={fontSize}
           hue={hue}
           showWcagContrast={showWcagContrast}
