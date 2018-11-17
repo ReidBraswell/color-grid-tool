@@ -1,10 +1,10 @@
 import * as React from 'react';
+import ClipboardJS from 'clipboard';
 
-import ColorForm from './ColorForm/ColorForm';
 import ColorControls from './Controls/ColorControls';
+import WcagControls from './Controls/WcagControls';
 import DotGrid from './DotGrid/DotGrid';
 import './App.scss';
-import WcagControls from './Controls/WcagControls';
 
 type AppProps = {};
 type AppState = {
@@ -17,6 +17,8 @@ type AppState = {
 };
 
 class App extends React.Component<AppProps, AppState> {
+  clipboard!: ClipboardJS;
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
@@ -31,6 +33,11 @@ class App extends React.Component<AppProps, AppState> {
 
   componentDidMount() {
     this.attemptToFetchCachedState();
+    this.clipboard = new ClipboardJS('.hover-target');
+  }
+
+  componentWillUnmount() {
+    this.clipboard.destroy();
   }
 
   attemptToFetchCachedState(): void {
@@ -99,8 +106,8 @@ class App extends React.Component<AppProps, AppState> {
       showColorRamps
     } = this.state;
     return (
-      <main className="layout-grid">
-        <div className="form-grid">
+      <React.Fragment>
+        <aside className="form-grid">
           <h1>Color Grid Tool</h1>
           <ColorControls
             showGrayscale={showGrayscale}
@@ -117,7 +124,7 @@ class App extends React.Component<AppProps, AppState> {
             showWcagContrast={showWcagContrast}
             handleWcagContrastChange={this.handleWcagContrastChange}
           />
-        </div>
+        </aside>
         <DotGrid
           fontSize={fontSize}
           hue={hue}
@@ -125,7 +132,7 @@ class App extends React.Component<AppProps, AppState> {
           showGrayscale={showGrayscale}
           showColorRamps={showColorRamps}
         />
-      </main>
+      </React.Fragment>
     );
   }
 }

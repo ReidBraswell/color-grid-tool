@@ -1,12 +1,9 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip';
-import { fill } from 'core-js/es6/array';
 
 import generateBackgroundColor from '../utilities/generateBackgroundColor';
 import Dot from './Dot';
 import './DotGrid.css';
-
-const GRID_SIZE = 101;
 
 interface DotGridProps {
   fontSize: string;
@@ -23,25 +20,26 @@ function DotGrid({
   showGrayscale,
   showColorRamps
 }: DotGridProps) {
+  const dots = [];
+  for (let v = 100; v >= 0; v--) {
+    for (let s = 0; s <= 100; s++) {
+      const backgroundColor = generateBackgroundColor({
+        fontSize,
+        showWcagContrast,
+        showGrayscale,
+        showColorRamps,
+        h: hue,
+        s: s / 100,
+        v: v / 100
+      });
+      dots.push(<Dot key={`${v}-${s}`} backgroundColor={backgroundColor} />);
+    }
+  }
+
   return (
     <React.Fragment>
+      <section className="dot-grid">{dots}</section>
       <ReactTooltip id="grid-tooltip" effect="solid" />
-      <div className="dot-grid">
-        {fill(Array(GRID_SIZE), '').map((r, v) => {
-          return fill(Array(GRID_SIZE), '').map((c, s) => {
-            const backgroundColor = generateBackgroundColor({
-              fontSize,
-              showWcagContrast,
-              showGrayscale,
-              showColorRamps,
-              h: hue,
-              s: s / 100,
-              v: Math.abs(v - 100) / 100
-            });
-            return <Dot key={`${v}-${s}`} backgroundColor={backgroundColor} />;
-          });
-        })}
-      </div>
     </React.Fragment>
   );
 }
