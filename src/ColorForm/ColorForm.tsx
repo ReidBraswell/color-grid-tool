@@ -12,11 +12,10 @@ function ColorForm({
   handleHueSubmit
 }: ColorFormProps) {
   return (
-    <React.Fragment>
-      <form noValidate onSubmit={handleHueSubmit}>
-        <label htmlFor="hueValue">Hue: </label>
+    <form noValidate onSubmit={handleHueSubmit}>
+      <fieldset>
+        <legend>Hue</legend>
         <input
-          id="hueValue"
           type="number"
           min="0"
           max="360"
@@ -25,8 +24,8 @@ function ColorForm({
           onChange={handleHueChange}
         />
         <button type="submit">Update Hue</button>
-      </form>
-    </React.Fragment>
+      </fieldset>
+    </form>
   );
 }
 

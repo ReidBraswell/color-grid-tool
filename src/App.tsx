@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import ColorForm from './ColorForm/ColorForm';
 import ColorControls from './Controls/ColorControls';
-import Grid from './Grid/Grid';
-import './App.css';
+import DotGrid from './DotGrid/DotGrid';
+import './App.scss';
 import WcagControls from './Controls/WcagControls';
 
 type AppProps = {};
@@ -99,35 +99,33 @@ class App extends React.Component<AppProps, AppState> {
       showColorRamps
     } = this.state;
     return (
-      <React.Fragment>
-        <h1>Color Grid Tool</h1>
-        <ColorForm
-          hueValue={hueValue}
-          handleHueChange={this.handleHueChange}
-          handleHueSubmit={this.handleHueSubmit}
-        />
+      <main className="layout-grid">
         <div className="form-grid">
+          <h1>Color Grid Tool</h1>
+          <ColorControls
+            showGrayscale={showGrayscale}
+            handleGrayscaleChange={this.handleGrayscaleChange}
+            showColorRamps={showColorRamps}
+            handleColorRampsChange={this.handleColorRampsChange}
+            hueValue={hueValue}
+            handleHueChange={this.handleHueChange}
+            handleHueSubmit={this.handleHueSubmit}
+          />
           <WcagControls
             fontSize={fontSize}
             handleFontSizeChange={this.handleFontSizeChange}
             showWcagContrast={showWcagContrast}
             handleWcagContrastChange={this.handleWcagContrastChange}
           />
-          <ColorControls
-            showGrayscale={showGrayscale}
-            handleGrayscaleChange={this.handleGrayscaleChange}
-            showColorRamps={showColorRamps}
-            handleColorRampsChange={this.handleColorRampsChange}
-          />
         </div>
-        <Grid
+        <DotGrid
           fontSize={fontSize}
           hue={hue}
           showWcagContrast={showWcagContrast}
           showGrayscale={showGrayscale}
           showColorRamps={showColorRamps}
         />
-      </React.Fragment>
+      </main>
     );
   }
 }
