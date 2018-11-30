@@ -36,12 +36,13 @@
   },
   "devDependencies": {
     "@types/clipboard": "2.0.1",
-    "@types/react": "16.7.6",
-    "@types/react-dom": "16.0.9",
+    "@types/node": "10.12.10",
+    "@types/react": "16.7.10",
+    "@types/react-dom": "16.0.11",
     "@types/react-tooltip": "3.3.6",
     "@types/tinycolor2": "1.4.1",
     "node-sass": "4.10.0",
-    "typescript": "3.1.6"
+    "typescript": "3.2.1"
   },
   "browserslist": [
     ">0.2%",
