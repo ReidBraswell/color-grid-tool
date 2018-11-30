@@ -8,6 +8,7 @@ import './App.scss';
 
 type AppProps = {};
 type AppState = {
+  colorRampStyle: string;
   fontSize: string;
   hue: number;
   hueValue: number;
@@ -22,6 +23,7 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
+      colorRampStyle: 'light',
       fontSize: '14',
       hue: 0,
       hueValue: 0,
@@ -96,8 +98,14 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ showColorRamps: target.checked }, this.updateLocalStorage);
   };
 
+  handleColorRampStyleChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ colorRampStyle: target.value }, this.updateLocalStorage);
+  };
+
   render() {
     const {
+      colorRampStyle,
       fontSize,
       hue,
       hueValue,
@@ -110,13 +118,15 @@ class App extends React.Component<AppProps, AppState> {
         <aside className="form-grid">
           <h1>Color Grid Tool</h1>
           <ColorControls
+            hueValue={hueValue}
+            handleHueChange={this.handleHueChange}
+            handleHueSubmit={this.handleHueSubmit}
             showGrayscale={showGrayscale}
             handleGrayscaleChange={this.handleGrayscaleChange}
             showColorRamps={showColorRamps}
             handleColorRampsChange={this.handleColorRampsChange}
-            hueValue={hueValue}
-            handleHueChange={this.handleHueChange}
-            handleHueSubmit={this.handleHueSubmit}
+            colorRampStyle={colorRampStyle}
+            handleColorRampStyleChange={this.handleColorRampStyleChange}
           />
           <WcagControls
             fontSize={fontSize}
@@ -126,6 +136,7 @@ class App extends React.Component<AppProps, AppState> {
           />
         </aside>
         <DotGrid
+          colorRampStyle={colorRampStyle}
           fontSize={fontSize}
           hue={hue}
           showWcagContrast={showWcagContrast}

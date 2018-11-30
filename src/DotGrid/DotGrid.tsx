@@ -6,6 +6,7 @@ import Dot from './Dot';
 import './DotGrid.css';
 
 interface DotGridProps {
+  colorRampStyle: string;
   fontSize: string;
   hue: number;
   showWcagContrast: boolean;
@@ -14,6 +15,7 @@ interface DotGridProps {
 }
 
 function DotGrid({
+  colorRampStyle,
   fontSize,
   hue,
   showWcagContrast,
@@ -24,6 +26,7 @@ function DotGrid({
   for (let v = 100; v >= 0; v--) {
     for (let s = 0; s <= 100; s++) {
       const backgroundColor = generateBackgroundColor({
+        colorRampStyle,
         fontSize,
         showWcagContrast,
         showGrayscale,

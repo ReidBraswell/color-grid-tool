@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 
-export const L_VALUES = [
+export const DARK_L_VALUES = [
   96, // 50
   88, // 100
   80, // 200
@@ -11,6 +11,19 @@ export const L_VALUES = [
   30, // 700
   21, // 800
   15 // 900
+];
+
+export const LIGHT_L_VALUES = [
+  97, // 50
+  93, // 100
+  88, // 200
+  82, // 300
+  75, // 400
+  67, // 500
+  57, // 600
+  45, // 700
+  35, // 800
+  27 // 900
 ];
 
 interface rgb {

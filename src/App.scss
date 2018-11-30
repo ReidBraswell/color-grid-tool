@@ -45,7 +45,11 @@ fieldset {
   }
 
   fieldset {
-    margin-top: 0.5rem;
+    margin: 1rem 0;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 }
 
