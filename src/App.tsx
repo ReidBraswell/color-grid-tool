@@ -72,7 +72,7 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ hue: hueValue }, this.updateLocalStorage);
   };
 
-  handleHueChange = (e: React.FormEvent<EventTarget>) => {
+  handleHueValueChange = (e: React.FormEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement;
     this.setState(
       { hueValue: parseInt(target.value, 10) },
@@ -119,7 +119,7 @@ class App extends React.Component<AppProps, AppState> {
           <h1>Color Grid Tool</h1>
           <ColorControls
             hueValue={hueValue}
-            handleHueChange={this.handleHueChange}
+            handleHueValueChange={this.handleHueValueChange}
             handleHueSubmit={this.handleHueSubmit}
             showGrayscale={showGrayscale}
             handleGrayscaleChange={this.handleGrayscaleChange}
