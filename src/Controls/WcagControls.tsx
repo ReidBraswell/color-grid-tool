@@ -7,54 +7,68 @@ interface WcagControlsProps {
   handleFontSizeChange: (e: React.FormEvent<EventTarget>) => void;
 }
 
-function WcagControls({
-  showWcagContrast,
-  handleWcagContrastChange,
-  fontSize,
-  handleFontSizeChange
-}: WcagControlsProps) {
-  return (
-    <form noValidate>
-      <fieldset>
-        <legend>WCAG Controls</legend>
-        <div>
-          <input
-            id="showWcagContrast"
-            name="showWcagContrast"
-            type="checkbox"
-            checked={showWcagContrast}
-            onChange={handleWcagContrastChange}
-          />
-          <label htmlFor="showWcagContrast">WCAG Contrast</label>
-        </div>
+class WcagControls extends React.Component<WcagControlsProps> {
+  public shouldComponentUpdate(nextProps: WcagControlsProps) {
+    if (
+      this.props.showWcagContrast !== nextProps.showWcagContrast ||
+      this.props.fontSize !== nextProps.fontSize
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public render() {
+    const {
+      showWcagContrast,
+      handleWcagContrastChange,
+      fontSize,
+      handleFontSizeChange
+    } = this.props;
+    return (
+      <form noValidate>
         <fieldset>
-          <legend>Font Size</legend>
+          <legend>WCAG Controls</legend>
           <div>
             <input
-              id="14"
-              type="radio"
-              name="fontSize"
-              value="14"
-              checked={fontSize === '14'}
-              onChange={handleFontSizeChange}
+              id="showWcagContrast"
+              name="showWcagContrast"
+              type="checkbox"
+              checked={showWcagContrast}
+              onChange={handleWcagContrastChange}
             />
-            <label htmlFor="14">14pt</label>
+            <label htmlFor="showWcagContrast">WCAG Contrast</label>
           </div>
-          <div>
-            <input
-              id="18"
-              type="radio"
-              name="fontSize"
-              value="18"
-              checked={fontSize === '18'}
-              onChange={handleFontSizeChange}
-            />
-            <label htmlFor="18">18pt</label>
-          </div>
+          <fieldset>
+            <legend>Font Size</legend>
+            <div>
+              <input
+                id="14"
+                type="radio"
+                name="fontSize"
+                value="14"
+                checked={fontSize === '14'}
+                onChange={handleFontSizeChange}
+              />
+              <label htmlFor="14">14pt</label>
+            </div>
+            <div>
+              <input
+                id="18"
+                type="radio"
+                name="fontSize"
+                value="18"
+                checked={fontSize === '18'}
+                onChange={handleFontSizeChange}
+              />
+              <label htmlFor="18">18pt</label>
+            </div>
+          </fieldset>
         </fieldset>
-      </fieldset>
-    </form>
-  );
+      </form>
+    );
+  }
 }
 
 export default WcagControls;
