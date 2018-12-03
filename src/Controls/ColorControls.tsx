@@ -85,6 +85,7 @@ class ColorControls extends React.Component<ColorControlsProps> {
                 name="colorRampStyle"
                 value="light"
                 checked={colorRampStyle === 'light'}
+                disabled={!showColorRamps}
                 onChange={handleColorRampStyleChange}
               />
               <label htmlFor="light">Light</label>
@@ -96,6 +97,7 @@ class ColorControls extends React.Component<ColorControlsProps> {
                 name="colorRampStyle"
                 value="dark"
                 checked={colorRampStyle === 'dark'}
+                disabled={!showColorRamps}
                 onChange={handleColorRampStyleChange}
               />
               <label htmlFor="dark">Dark</label>

@@ -49,6 +49,7 @@ class WcagControls extends React.Component<WcagControlsProps> {
                 name="fontSize"
                 value="14"
                 checked={fontSize === '14'}
+                disabled={!showWcagContrast}
                 onChange={handleFontSizeChange}
               />
               <label htmlFor="14">14pt</label>
@@ -60,6 +61,7 @@ class WcagControls extends React.Component<WcagControlsProps> {
                 name="fontSize"
                 value="18"
                 checked={fontSize === '18'}
+                disabled={!showWcagContrast}
                 onChange={handleFontSizeChange}
               />
               <label htmlFor="18">18pt</label>
