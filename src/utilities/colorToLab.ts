@@ -14,11 +14,11 @@ export const DARK_L_VALUES = [
 ];
 
 export const LIGHT_L_VALUES = [
-  96, // 50
-  92, // 100
-  87, // 200
-  81, // 300
-  76 // 400
+  98, // 50
+  96, // 100
+  93, // 200
+  89, // 300
+  87 // 400
 ];
 
 interface rgb {
