@@ -1,12 +1,14 @@
 import tinycolor from 'tinycolor2';
 
+export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
 export const DARK_L_VALUES = [
   98, // 50
   95, // 100
   89, // 200
   81, // 300
   71, // 400
-  57, // 500
+  60, // 500
   48, // 600
   38, // 700
   29, // 800

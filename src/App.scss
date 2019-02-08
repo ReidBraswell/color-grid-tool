@@ -51,6 +51,28 @@ fieldset {
       margin-bottom: 0;
     }
   }
+
+  table {
+    border-collapse: collapse;
+    margin-top: 1rem;
+    width: 100%;
+
+    thead {
+      border-bottom: 1px dashed #000;
+
+      th {
+        padding: .25rem 0;
+      }
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #eee;
+    }
+
+    th, td {
+      text-align: center;
+    }
+  }
 }
 
 input[type='checkbox']:disabled + label {

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { SHADES, DARK_L_VALUES } from './../utilities/colorToLab';
+
 interface ColorControlsProps {
   hueValue: number;
   handleHueValueChange: (e: React.FormEvent<EventTarget>) => void;
@@ -103,6 +105,22 @@ class ColorControls extends React.Component<ColorControlsProps> {
               <label htmlFor="dark">Dark</label>
             </div>
           </fieldset>
+          <table>
+            <thead>
+              <tr>
+                <th>Shade</th>
+                <th>L Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SHADES.map((shade, index) => (
+                <tr key={shade}>
+                  <td>{shade}</td>
+                  <td>{DARK_L_VALUES[index]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </fieldset>
       </form>
     );
