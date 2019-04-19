@@ -10,7 +10,7 @@ export const GRAYSCALE_VALUES = [
   '#5c5c5c', // 92
   '#474747', // 71
   '#363636', // 54
-  '#262626' // 38
+  '#262626', // 38
 ];
 
 function colorToGrayscaleHex(color: tinycolor.Instance): string {

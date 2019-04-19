@@ -1,13 +1,13 @@
 import tinycolor from 'tinycolor2';
 
+import colorToGrayscaleHex from '../utilities/colorToGrayscaleHex';
 import colorToLab, {
   DARK_L_VALUES,
-  LIGHT_L_VALUES
+  LIGHT_L_VALUES,
 } from '../utilities/colorToLab';
-import colorToGrayscaleHex from '../utilities/colorToGrayscaleHex';
 import checkIsReadable from './checkIsReadable';
 
-interface GenerateBackgroundColor {
+interface IBackgroundColor {
   colorRampStyle: string;
   fontSize: string;
   h: number;
@@ -26,8 +26,8 @@ export default function generateBackgroundColor({
   v,
   showWcagContrast,
   showGrayscale,
-  showColorRamps
-}: GenerateBackgroundColor): string {
+  showColorRamps,
+}: IBackgroundColor): string {
   const color = tinycolor({ h, s, v });
   const hex = color.toHexString();
   const isReadable = checkIsReadable({ fontSize, hex });

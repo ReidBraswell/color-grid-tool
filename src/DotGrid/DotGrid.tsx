@@ -1,11 +1,12 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import generateBackgroundColor from '../utilities/generateBackgroundColor';
+import generateBackgroundColor from './../utilities/generateBackgroundColor';
 import Dot from './Dot';
-import './DotGrid.css';
 
-interface DotGridProps {
+import './DotGrid.scss';
+
+interface IDotGridProps {
   colorRampStyle: string;
   fontSize: string;
   hue: number;
@@ -14,8 +15,8 @@ interface DotGridProps {
   showColorRamps: boolean;
 }
 
-class DotGrid extends React.Component<DotGridProps> {
-  public shouldComponentUpdate(nextProps: DotGridProps) {
+class DotGrid extends React.Component<IDotGridProps> {
+  public shouldComponentUpdate(nextProps: IDotGridProps) {
     if (
       this.props.colorRampStyle !== nextProps.colorRampStyle ||
       this.props.fontSize !== nextProps.fontSize ||
@@ -37,20 +38,20 @@ class DotGrid extends React.Component<DotGridProps> {
       hue,
       showWcagContrast,
       showGrayscale,
-      showColorRamps
+      showColorRamps,
     } = this.props;
     const dots = [];
-    for (let v = 100; v >= 0; v--) {
-      for (let s = 0; s <= 100; s++) {
+    for (let v = 100; v >= 0; v -= 1) {
+      for (let s = 0; s <= 100; s += 1) {
         const backgroundColor = generateBackgroundColor({
           colorRampStyle,
           fontSize,
-          showWcagContrast,
-          showGrayscale,
-          showColorRamps,
           h: hue,
           s: s / 100,
-          v: v / 100
+          showColorRamps,
+          showGrayscale,
+          showWcagContrast,
+          v: v / 100,
         });
         dots.push(<Dot key={`${v}-${s}`} backgroundColor={backgroundColor} />);
       }

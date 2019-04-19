@@ -13,7 +13,7 @@ export const DARK_L_VALUES = [
   38, // 700
   29, // 800
   21, // 900
-  15 // 1000
+  15, // 1000
 ];
 
 export const LIGHT_L_VALUES = [
@@ -21,26 +21,29 @@ export const LIGHT_L_VALUES = [
   96, // 100
   93, // 200
   89, // 300
-  87 // 400
+  87, // 400
 ];
 
-interface rgb {
+interface IRgb {
   r: number;
   g: number;
   b: number;
 }
 
-interface lab {
+interface ILab {
   l: number;
   a: number;
   b: number;
 }
 
-function rgbToLab({ r, g, b }: rgb): lab {
+function rgbToLab({ r, g, b }: IRgb): ILab {
   r = r / 255;
   g = g / 255;
   b = b / 255;
-  let x, y, z;
+
+  let x;
+  let y;
+  let z;
 
   r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
   g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
@@ -57,7 +60,7 @@ function rgbToLab({ r, g, b }: rgb): lab {
   return { l: 116 * y - 16, a: 500 * (x - y), b: 200 * (y - z) };
 }
 
-function colorToLab(color: tinycolor.Instance): lab {
+function colorToLab(color: tinycolor.Instance): ILab {
   return rgbToLab(color.toRgb());
 }
 

@@ -1,13 +1,15 @@
-import * as React from 'react';
 import ClipboardJS from 'clipboard';
+import * as React from 'react';
 
 import ColorControls from './Controls/ColorControls';
 import WcagControls from './Controls/WcagControls';
 import DotGrid from './DotGrid/DotGrid';
+
 import './App.scss';
 
-type AppProps = {};
-type AppState = {
+// tslint:disable-next-line: no-empty-interface
+interface IAppProps {}
+interface IAppState {
   colorRampStyle: string;
   fontSize: string;
   hue: number;
@@ -15,95 +17,34 @@ type AppState = {
   showWcagContrast: boolean;
   showGrayscale: boolean;
   showColorRamps: boolean;
-};
+}
 
-class App extends React.Component<AppProps, AppState> {
-  clipboard!: ClipboardJS;
+class App extends React.Component<IAppProps, IAppState> {
+  private clipboard!: ClipboardJS;
 
-  constructor(props: AppProps) {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
-      colorRampStyle: 'light',
+      colorRampStyle: 'dark',
       fontSize: '14',
       hue: 0,
       hueValue: 0,
-      showWcagContrast: false,
+      showColorRamps: false,
       showGrayscale: false,
-      showColorRamps: false
+      showWcagContrast: false,
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.attemptToFetchCachedState();
     this.clipboard = new ClipboardJS('.hover-target');
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.clipboard.destroy();
   }
 
-  attemptToFetchCachedState(): void {
-    const colorGridState = localStorage.getItem('colorGridState');
-    if (colorGridState) {
-      try {
-        const state: AppState = JSON.parse(colorGridState);
-        this.setState(state);
-      } catch (error) {
-        console.error(error);
-        this.updateLocalStorage();
-      }
-    } else {
-      this.updateLocalStorage();
-    }
-  }
-
-  updateLocalStorage(): void {
-    localStorage.setItem('colorGridState', JSON.stringify(this.state));
-  }
-
-  handleFontSizeChange = (e: React.FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    this.setState({ fontSize: target.value }, this.updateLocalStorage);
-  };
-
-  handleHueSubmit = (e: React.FormEvent<EventTarget>) => {
-    e.preventDefault();
-    const { hueValue } = this.state;
-    this.setState({ hue: hueValue }, this.updateLocalStorage);
-  };
-
-  handleHueValueChange = (e: React.FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    this.setState(
-      { hueValue: parseInt(target.value, 10) },
-      this.updateLocalStorage
-    );
-  };
-
-  handleWcagContrastChange = (e: React.FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    this.setState(
-      { showWcagContrast: target.checked },
-      this.updateLocalStorage
-    );
-  };
-
-  handleGrayscaleChange = (e: React.FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    this.setState({ showGrayscale: target.checked }, this.updateLocalStorage);
-  };
-
-  handleColorRampsChange = (e: React.FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    this.setState({ showColorRamps: target.checked }, this.updateLocalStorage);
-  };
-
-  handleColorRampStyleChange = (e: React.FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    this.setState({ colorRampStyle: target.value }, this.updateLocalStorage);
-  };
-
-  render() {
+  public render() {
     const {
       colorRampStyle,
       fontSize,
@@ -111,7 +52,7 @@ class App extends React.Component<AppProps, AppState> {
       hueValue,
       showWcagContrast,
       showGrayscale,
-      showColorRamps
+      showColorRamps,
     } = this.state;
     return (
       <React.Fragment>
@@ -146,6 +87,68 @@ class App extends React.Component<AppProps, AppState> {
       </React.Fragment>
     );
   }
+
+  private attemptToFetchCachedState(): void {
+    const colorGridState = localStorage.getItem('colorGridState');
+    if (colorGridState) {
+      try {
+        const state: IAppState = JSON.parse(colorGridState);
+        this.setState(state);
+      } catch (error) {
+        // tslint:disable-next-line: no-console
+        console.error(error);
+        this.updateLocalStorage();
+      }
+    } else {
+      this.updateLocalStorage();
+    }
+  }
+
+  private updateLocalStorage(): void {
+    localStorage.setItem('colorGridState', JSON.stringify(this.state));
+  }
+
+  private handleFontSizeChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ fontSize: target.value }, this.updateLocalStorage);
+  };
+
+  private handleHueSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    const { hueValue } = this.state;
+    this.setState({ hue: hueValue }, this.updateLocalStorage);
+  };
+
+  private handleHueValueChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState(
+      { hueValue: parseInt(target.value, 10) },
+      this.updateLocalStorage
+    );
+  };
+
+  private handleWcagContrastChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState(
+      { showWcagContrast: target.checked },
+      this.updateLocalStorage
+    );
+  };
+
+  private handleGrayscaleChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ showGrayscale: target.checked }, this.updateLocalStorage);
+  };
+
+  private handleColorRampsChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ showColorRamps: target.checked }, this.updateLocalStorage);
+  };
+
+  private handleColorRampStyleChange = (e: React.FormEvent<EventTarget>) => {
+    const target = e.target as HTMLInputElement;
+    this.setState({ colorRampStyle: target.value }, this.updateLocalStorage);
+  };
 }
 
 export default App;

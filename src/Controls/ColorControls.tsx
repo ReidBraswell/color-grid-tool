@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { SHADES, DARK_L_VALUES } from './../utilities/colorToLab';
+import { DARK_L_VALUES, SHADES } from './../utilities/colorToLab';
 
-interface ColorControlsProps {
+interface IColorControlsProps {
   hueValue: number;
   handleHueValueChange: (e: React.FormEvent<EventTarget>) => void;
   handleHueSubmit: (e: React.FormEvent<EventTarget>) => void;
@@ -14,8 +14,8 @@ interface ColorControlsProps {
   handleColorRampStyleChange: (e: React.FormEvent<EventTarget>) => void;
 }
 
-class ColorControls extends React.Component<ColorControlsProps> {
-  public shouldComponentUpdate(nextProps: ColorControlsProps) {
+class ColorControls extends React.Component<IColorControlsProps> {
+  public shouldComponentUpdate(nextProps: IColorControlsProps) {
     if (
       this.props.hueValue !== nextProps.hueValue ||
       this.props.showGrayscale !== nextProps.showGrayscale ||
@@ -38,10 +38,10 @@ class ColorControls extends React.Component<ColorControlsProps> {
       showColorRamps,
       handleColorRampsChange,
       colorRampStyle,
-      handleColorRampStyleChange
+      handleColorRampStyleChange,
     } = this.props;
     return (
-      <form noValidate onSubmit={handleHueSubmit}>
+      <form noValidate={true} onSubmit={handleHueSubmit}>
         <fieldset>
           <legend>Color Controls</legend>
           <div>
@@ -78,7 +78,7 @@ class ColorControls extends React.Component<ColorControlsProps> {
             />
             <label htmlFor="showColorRamps">Color Ramps</label>
           </div>
-          <fieldset>
+          <fieldset disabled={!showColorRamps}>
             <legend>Color Ramp Style</legend>
             <div>
               <input
@@ -87,7 +87,6 @@ class ColorControls extends React.Component<ColorControlsProps> {
                 name="colorRampStyle"
                 value="light"
                 checked={colorRampStyle === 'light'}
-                disabled={!showColorRamps}
                 onChange={handleColorRampStyleChange}
               />
               <label htmlFor="light">Light</label>
@@ -99,7 +98,6 @@ class ColorControls extends React.Component<ColorControlsProps> {
                 name="colorRampStyle"
                 value="dark"
                 checked={colorRampStyle === 'dark'}
-                disabled={!showColorRamps}
                 onChange={handleColorRampStyleChange}
               />
               <label htmlFor="dark">Dark</label>
