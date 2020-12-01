@@ -41,7 +41,7 @@
     "@types/react-dom": "16.8.0",
     "@types/react-tooltip": "3.9.0",
     "@types/tinycolor2": "1.4.1",
-    "node-sass": "4.11.0",
+    "node-sass": "4.13.1",
     "typescript": "3.3.3"
   },
   "browserslist": [
